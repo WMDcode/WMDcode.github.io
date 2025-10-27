@@ -1,0 +1,18 @@
+name: "Personal Website"
+output_dir: "."
+navbar:
+  title: "William Donovan"
+  right:
+    - text: "About"
+      href: about.html
+    - text: "Resume"
+      href: resume.html
+    - icon: fa-envelope fa-lg
+      href: mailto:<wmdonovan96@gmail.com>
+    - icon: fa-github fa-lg
+      href: http://github.com/wmdcode/
+    - icon: fa-brands fa-linkedin
+      href: https://www.linkedin.com/in/william-donovan-10999413a/
+output:
+  html_document:
+    theme: cerulean

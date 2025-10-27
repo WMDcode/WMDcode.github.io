@@ -1,0 +1,75 @@
+---
+title: "Resume"
+output: 
+  html_document:
+    toc: true
+    toc_float: true
+---
+
+### Summary
+
+Biostatistics graduate student and research associate, with a strong background in infectious disease research, molecular diagnostics, and next generation sequencing (NGS). Developing expertise in biostatistical modeling, data analysis, and bioinformatics workflows. Experienced in both wet-lab and computational approaches, with a growing focus on data-driven methods for public health and translational research. Analytical, detail-oriented, and an excellent problem-solver.
+
+### Skills
+
+Extensive experience in library preparation and target enrichment (liquid capture) sequencing using Illumina and Nanopore platforms; various nucleic acid extraction methods; real-time/quantitative PCR (qPCR); BSL-3 laboratory protocols; quality control (QC); and technical training/instruction. Proficient in Python, R, and UNIX/Bash scripting for data analysis and basic pipeline development. Experienced with Microsoft Excel for data handling and reporting.
+
+### Professional Experience
+
+#### Staff Associate III | Aug 2022 - present
+##### Columbia University	| New York, NY
+
+  -	Establish and optimize sequencing protocols (Illumina and Nanopore) and train collaborators and junior staff.
+  -	Contribute to NGS bioinformatics analysis, including scripting to automate data processing tasks and exploratory analysis using Python, R, and Bash.
+  -	Led international field trainings in Zambia and Zimbabwe as part of the Global Alliance for Preventing Pandemics (GAPP), focused on pan-respiratory disease surveillance.
+  -	Prepare sequencing assays for validation with the New York State Department of Health and the Food and Drug Administration (FDA).
+  -	Perform additional lab work as needed, such as pre-extraction sample processing, automated extraction, PBMC isolation/counting, mammalian cell culture, and BSL-3 work.
+
+#### Molecular Biologist | Oct 2020 – Aug 2022
+##### Pacific Architects and Engineers / Amentum | New York, NY
+
+  -	Processed, tested, and analyzed environmental, QC, and proficiency test samples for early detection and surveillance of airborne bio-threat agents for a government biodefense program.
+  -	Prepared qPCR assays and performed DNA extraction using a vacuum filtration plate system.
+  -	Managed lab data and tracked data trends using MS Excel.
+  -	Performed quality control for instruments and reagents, documenting results and maintaining records.
+  -	Maintained equipment, performed data backups, and managed sample tracking.
+  -	Developed more efficient traceability documentation resulting in a 50%-time savings.
+  -	Followed strict protocols working in a biosafety level 3 (BSL-3) laboratory.
+
+
+#### Lab Technician	| Oct 2019 – Oct 2020
+##### Columbia University	| New York, NY
+
+  -	Managed transgenic mouse colonies (genotyping, breeding, record maintenance).
+  -	Developed a database using MS Excel for tracking hundreds of mice.
+  -	Performed DNA extraction, PCR, and gel electrophoresis for genotyping assays.
+  -	Handled laboratory operations such as maintaining reagent inventories and ordering supplies.
+
+#### Undergraduate Research Assistant	| May 2018 – Aug 2019
+##### University of Kansas | Lawrence, KS
+
+  -	Assisted with mouse PCR genotyping and data entry.
+
+### Education
+
+#### MS Biostatistics	| Part-time | Expected May 2027
+##### Columbia University	| New York, NY
+
+#### BS Biochemistry | May 2019
+##### University of Kansas | Lawrence, KS
+
+### Publications
+
+Kapoor, Vishal, Thomas Briese, Amit Ranjan, **William Donovan**, Mahesh Mansukhani, Rashmi Chowdhary, and W. Ian Lipkin. (2023, December 14). "Validation of the VirCapSeq-VERT System for Differential Diagnosis, Detection, and Surveillance of Viral Infections." Journal of Clinical Microbiology, American Society of Microbiology.
+
+### Leadership and Awards
+
+#### Club President	| Aug 2018 – May 2019
+##### University of Kansas Rock Climbing Club
+
+Led inter-state traveling events and club activities for up to 50 people and managed a $15,000 budget.
+
+#### Eagle Scout | Jul 2014
+##### Boy Scouts of America
+
+Eagle Project: Designed and built an information kiosk in a local park for the city of Kenmore, WA.
