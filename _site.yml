@@ -5,7 +5,7 @@ navbar:
   right:
     - text: "Resume"
       href: resume.html
-    - text: "Problem 2"
+    - text: "Burgers"
       href: problem2.html
     - icon: fa-envelope fa-lg
       href: mailto:<wmdonovan96@gmail.com>
