@@ -1,0 +1,129 @@
+---
+title: "Problem 2"
+output: 
+  flexdashboard::flex_dashboard:
+    orientation: columns
+    vertical_layout: fill
+---
+
+```{r setup, include=FALSE}
+library(flexdashboard)
+library(tidyverse)
+library(p8105.datasets)
+library(plotly)
+```
+
+Column {data-width=650}
+-----------------------------------------------------------------------
+
+### Manhattan Burger Restaurant/Chain Sanitation Score Distributions
+
+```{r echo=FALSE}
+nyc_burgers = rest_inspec |>
+  mutate(
+    dba = tolower(dba)) |>
+  filter(
+    inspection_date >= "2015-01-01",
+    latitude != 0,
+    longitude != 0,
+    str_detect(dba, "burger") |
+    cuisine_description == "Hamburgers",
+    boro == "Manhattan") |>
+  mutate(name_clean = dba |>
+           janitor::make_clean_names(case = "big_camel") |>
+           str_replace("^X", "") |>
+           str_replace_all("_", "") |>
+           str_replace("[^a-zA-Z]+$", ""))
+```
+
+
+```{r echo=FALSE}
+nyc_burgers |>
+  filter(!is.na(score)) |>
+  group_by(camis, name_clean, inspection_date) |>
+  summarise(score = mean(score), .groups = "drop") |>
+  mutate(name_clean = fct_reorder(name_clean, score)) |>
+  plot_ly(y = ~score, color = ~name_clean, type = "box", colors = "viridis") |>
+  layout(
+    showlegend = FALSE)
+```
+
+Column {data-width=350}
+-----------------------------------------------------------------------
+
+### Manhattan Burger Restaurant Map and Average Sanitation
+
+```{r echo=FALSE}
+Sys.setenv('MAPBOX_TOKEN' = "pk.eyJ1Ijoid21kOTYiLCJhIjoiY21oYjVxNXkyMGQ1ZDJrcTBhdW95MGVlNCJ9.NZM_OBnxuiup2BgsrlqvXQ")
+
+nyc_burgers |>
+  filter(!is.na(score)) |>
+  group_by(camis, 
+           dba, 
+           latitude,
+           longitude,
+           inspection_date) |>
+  summarise(score = mean(score),
+            .groups = "drop") |>
+  group_by(camis, 
+           dba, 
+           latitude,
+           longitude) |>
+  summarise(mean_score = mean(score),
+            .groups = "drop") |>
+  plot_mapbox(
+    lat = ~latitude, 
+    lon = ~longitude, 
+    color = ~mean_score,
+    text = ~paste0("<b>", dba, "</b><br>Mean Score: ", round(mean_score, 1)),
+    hoverinfo = "text") |>
+  add_markers(size = 3) |>
+  layout(mapbox = list(
+    style = "carto-positron",
+    zoom = 10,
+    center = list(lat = 40.78, lon = -73.97)))
+      
+```
+
+### Number of Burger Restaurants by Manhattan Neighborhood
+
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+zipcodes_df = read_csv("data/Zip Codes.csv", na = "NA") |>
+  janitor::clean_names() |>
+  filter(county == "New York") |>
+  select(zip_code, neighborhood) |>
+  rename(zipcode = zip_code)
+
+left_join(nyc_burgers, zipcodes_df, by = "zipcode") |>
+  filter(!is.na(score)) |>
+  group_by(camis, neighborhood, inspection_date) |>
+  summarise(score = mean(score),
+            .groups = "drop") |>
+  group_by(camis, neighborhood) |>
+  summarise(mean_score = mean(score),
+            .groups = "drop") |>
+  mutate(grade = case_when(
+    mean_score < 14 ~ "A",
+    mean_score >= 14 & mean_score < 28 ~ "B",
+    mean_score >= 28 ~ "C")) |>
+  group_by(neighborhood) |>
+  summarise(
+    A = sum(grade == "A"),
+    B = sum(grade == "B"),
+    C = sum(grade == "C"),
+    .groups = "drop") |>
+  pivot_longer(
+    cols = A:C,
+    names_to = "grade",
+    values_to = "count") |>
+  mutate(neighborhood = case_match(
+    neighborhood,
+    NA_character_ ~ "Other",
+    .default = neighborhood)) |>
+  plot_ly(
+    x = ~neighborhood,
+    y = ~count,
+    color = ~grade)
+```
+
+

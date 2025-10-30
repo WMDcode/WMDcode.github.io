@@ -3,10 +3,10 @@ output_dir: "."
 navbar:
   title: "William Donovan"
   right:
-    - text: "About"
-      href: about.html
     - text: "Resume"
       href: resume.html
+    - text: "Problem 2"
+      href: problem2.html
     - icon: fa-envelope fa-lg
       href: mailto:<wmdonovan96@gmail.com>
     - icon: fa-github fa-lg
