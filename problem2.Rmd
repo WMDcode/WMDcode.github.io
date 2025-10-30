@@ -41,11 +41,20 @@ nyc_burgers = rest_inspec |>
 nyc_burgers |>
   filter(!is.na(score)) |>
   group_by(camis, name_clean, inspection_date) |>
-  summarise(score = mean(score), .groups = "drop") |>
-  mutate(name_clean = fct_reorder(name_clean, score)) |>
-  plot_ly(y = ~score, color = ~name_clean, type = "box", colors = "viridis") |>
+  summarise(
+    score = mean(score), 
+    .groups = "drop") |>
+  mutate(
+    name_clean = fct_reorder(name_clean, score)) |>
+  plot_ly(
+    y = ~score, 
+    color = ~name_clean, 
+    type = "box", 
+    colors = "viridis") |>
   layout(
-    showlegend = FALSE)
+    showlegend = FALSE,
+    xaxis = list(title = "Burger Restaurant"),
+    yaxis = list(title = "Sanitation Score"))
 ```
 
 Column {data-width=350}
@@ -69,8 +78,9 @@ nyc_burgers |>
            dba, 
            latitude,
            longitude) |>
-  summarise(mean_score = mean(score),
-            .groups = "drop") |>
+  summarise(
+    mean_score = mean(score),
+    .groups = "drop") |>
   plot_mapbox(
     lat = ~latitude, 
     lon = ~longitude, 
@@ -78,14 +88,16 @@ nyc_burgers |>
     text = ~paste0("<b>", dba, "</b><br>Mean Score: ", round(mean_score, 1)),
     hoverinfo = "text") |>
   add_markers(size = 3) |>
-  layout(mapbox = list(
-    style = "carto-positron",
-    zoom = 10,
-    center = list(lat = 40.78, lon = -73.97)))
+  layout(
+    mapbox = list(
+      style = "carto-positron",
+      zoom = 10,
+      center = list(lat = 40.78, lon = -73.97))) |>
+  colorbar(title = "Mean Score")
       
 ```
 
-### Number of Burger Restaurants by Manhattan Neighborhood
+### Number of Burger Restaurants by Manhattan Neighborhood and Sanitation Grade
 
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
 zipcodes_df = read_csv("data/Zip Codes.csv", na = "NA") |>
@@ -108,6 +120,7 @@ left_join(nyc_burgers, zipcodes_df, by = "zipcode") |>
     mean_score >= 28 ~ "C")) |>
   group_by(neighborhood) |>
   summarise(
+    total = n(),
     A = sum(grade == "A"),
     B = sum(grade == "B"),
     C = sum(grade == "C"),
@@ -116,14 +129,20 @@ left_join(nyc_burgers, zipcodes_df, by = "zipcode") |>
     cols = A:C,
     names_to = "grade",
     values_to = "count") |>
-  mutate(neighborhood = case_match(
-    neighborhood,
-    NA_character_ ~ "Other",
-    .default = neighborhood)) |>
+  mutate(
+    neighborhood = case_match(
+      neighborhood,
+      NA_character_ ~ "Other",
+      .default = neighborhood),
+    neighborhood = fct_reorder(neighborhood, total, .desc = TRUE)) |>
   plot_ly(
     x = ~neighborhood,
     y = ~count,
-    color = ~grade)
+    color = ~grade,
+    colors = "viridis") |>
+  layout(
+    xaxis = list(title = "Manhattan Neighborhood"),
+    yaxis = list(title = "Number of Burger Restaurants"))
 ```
 
 
